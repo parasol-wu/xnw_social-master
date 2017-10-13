@@ -1,0 +1,8 @@
+<script src="../../static/js/layout.js" charset="utf-8"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+</script>

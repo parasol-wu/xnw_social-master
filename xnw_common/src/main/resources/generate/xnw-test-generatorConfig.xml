@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <classPathEntry location="/mysql-connector-java-5.1.6.jar"/>
+    <context id="context1" targetRuntime="MyBatis3"
+             defaultModelType="flat">
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
+        <plugin type="com.xnw.persistence.mybatis.generator.plugins.BuildersPlugin"/>
+        <plugin type="com.xnw.persistence.mybatis.generator.plugins.CanonicalDomainPlugin"/>
+        <plugin type="com.xnw.persistence.mybatis.generator.plugins.MysqlPaginationPlugin"/>
+        <plugin type="com.xnw.persistence.mybatis.generator.plugins.ShardTablePlugin"/>
+        <plugin type="com.xnw.persistence.mybatis.generator.plugins.SelectByMapPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+            <property name="searchString" value="Example$"/>
+            <property name="replaceString" value="Conditions"/>
+        </plugin>
+
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释，默认false，true：去除；false：不去除 -->
+            <property name="suppressAllComments" value="true"/>
+            <!-- 指定在生成的注释是否将包括时间戳，默认是false -->
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/xnw_sys" userId="root"
+                        password="root"/>
+
+        <javaModelGenerator targetPackage="com.xnw.persistence.model"
+                            targetProject="xnw_persistence/src/main/java"/>
+        <sqlMapGenerator targetPackage="mapper" targetProject="xnw_persistence/src/main/resources"/>
+        <javaClientGenerator targetPackage="com.xnw.persistence.mapper"
+                             targetProject="xnw_persistence/src/main/java" type="XMLMAPPER">
+            <!--<property name="enableSubPackages" value="true" />-->
+            <!--<property name="rootInterface" value="com.xnw.persistence.mapper.BaseMapper"/>-->
+        </javaClientGenerator>
+
+
+
+        <table tableName="xnw_sys_function" domainObjectName="system.SysFunction">
+            <property name="partitionedTable" value="sys"/>
+            <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+            <columnOverride column="created_at" javaType="java.time.LocalDateTime"/>
+            <columnOverride column="updated_at" javaType="java.time.LocalDateTime"/>
+        </table>
+
+        <table tableName="xnw_sys_role" domainObjectName="system.SysRole">
+            <property name="partitionedTable" value="sys"/>
+            <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+            <columnOverride column="created_at" javaType="java.time.LocalDateTime"/>
+            <columnOverride column="updated_at" javaType="java.time.LocalDateTime"/>
+        </table>
+
+        <table tableName="xnw_sys_user" domainObjectName="system.SysUser">
+            <property name="partitionedTable" value="sys"/>
+            <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+            <columnOverride column="created_at" javaType="java.time.LocalDateTime"/>
+            <columnOverride column="updated_at" javaType="java.time.LocalDateTime"/>
+        </table>
+
+        <table tableName="xnw_sys_role_function" domainObjectName="system.SysRoleFunction">
+            <property name="partitionedTable" value="sys"/>
+        </table>
+
+        <table tableName="xnw_sys_user_role" domainObjectName="system.SysUserRole">
+            <property name="partitionedTable" value="sys"/>
+        </table>
+
+        <!--<javaTypeResolver />-->
+
+
+    </context>
+</generatorConfiguration>
